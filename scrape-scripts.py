@@ -87,4 +87,6 @@ the_leftovers_epis = pd.DataFrame({
 # Grab episode viewing statistics and add to db
 # Check this out --- https://en.wikipedia.org/wiki/List_of_The_Leftovers_episodes#Season_3_(2017)
 
+
+# Write to CSV
 the_leftovers_epis.to_csv("/Users/nickboyd/Desktop/GitHub/leftovers-tweet-bot/the_leftovers_scripts.csv", index=False)
