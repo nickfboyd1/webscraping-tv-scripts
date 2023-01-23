@@ -1,0 +1,49 @@
+---
+title: "leftovers-analysis"
+format: html
+editor: visual
+---
+
+## Introduction
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Analysis
+
+#### Setup
+
+```{r}
+# Import libraries
+library(tidyverse)
+library(stringr)
+
+# Load data
+df = read.csv("the_leftovers_scripts.csv")
+
+# Inspect
+head(df)
+```
+
+Cleaning the text here
+
+```{r}
+# Remove line breaks & dashes
+df$script <- gsub("\n", " ", df$script)
+df$script <- gsub("-", "", df$script)
+
+# Remove leading/trailing whitespace
+df$script = gsub("\\s", " ", df$script)
+
+# Sort the data correctly and save to CSV
+df_sorted =  df%>%
+    arrange(season, episode)
+
+write_csv(df_sorted, "the_leftovers_scripts_clean.csv")
+```
+
+Now I'll create a single transcript for all of the leftovers text.
+
+```{r}
+# Create single transcript for the entire show
+the_leftovers = str_c(df_sorted$script, collapse = " ")
+```
